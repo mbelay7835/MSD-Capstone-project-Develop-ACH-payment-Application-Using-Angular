@@ -1,0 +1,133 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<nav class="navbar navbar-light" style="background-color:#00008b">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1" style="color: white;">ACH-Braintree Payment System</span>
+  
+    <a [routerLink]="['/']" (click) = "logout()" style="color: white;" >LogOut</a>
+  </div>
+  
+</nav>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+<div class="payment">
+  <div class="container">
+    <br>
+    <div class="row">
+      <aside class="col-sm-6">
+        <h4>Payment Detail</h4>
+        <article class="card">
+          <div class="card-body p-5">
+
+            <!-- Form for payment -->
+            <form role="form" [formGroup]="paymentForm" (ngSubmit)="onPayment()">
+              <input type="text" class="form-control" placeholder="Enter Payment Amount $" required=""
+                class="alert alert-success" formControlName="chargeAmount">
+              <h6 class="account">Account-Information</h6>
+              <div class="form-group">
+                <label for="firstname">First Name*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="firstname" placeholder="Your First Name..." required=""
+                    formControlName="firstName">
+                </div> <!-- input-group.// -->
+              </div> <!-- form-group.// -->
+              <div class="form-group">
+                <label for="lastname">Last Name*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="lastname" placeholder="Your Last Name..." required=""
+                    formControlName="lastName">
+                </div> <!-- input-group.// -->
+              </div> <!-- form-group.// -->
+              <div class="form-group">
+                <label for="routing">Routing Number*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="routing" placeholder="Your Routing Number..."
+                    required="" formControlName="routingNumber">
+                </div> <!-- input-group.// -->
+              </div> <!-- form-group.// -->
+              <div class="form-group">
+                <label for="account">Account Number*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="username" placeholder="Your Account Number..."
+                    required="" formControlName="accountNumber">
+                </div> <!-- input-group.// -->
+              </div> <!-- form-group.// -->
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label><span class="hidden-xs">Acount
+                        Type*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span class="hidden-xs">Owner Type*</span> </label>
+                    <div class="form-inline">
+                      <select class="form-control" style="width:45%" formControlName="accountType">
+                        <option>saving</option>
+                        <option>checking</option>
+                      </select>
+                      <span style="width:10%; text-align: center"> </span>
+                      <select class="form-control" style="width:45%" formControlName="ownerType">
+                        <option>personal</option>
+                        <option>business</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- row.// -->
+              <h6 class="billing">Billing Adress</h6>
+              <div class="form-group">
+                <label for="streetAddress">Street Address*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="streetAddress" placeholder=""
+                    formControlName="streetAddress">
+                </div> <!-- input-group.// -->
+                <label for="buildingAddress">Building number</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="buildingAddress" placeholder="Ex. Apt."
+                    formControlName="buildingAddress">
+                </div>
+                <label for="city">City*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="city" placeholder="" formControlName="city"
+                    required=true>
+                </div> <!-- input-group.// -->
+                <label for="state">State*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="state" placeholder="EX. VA" formControlName="state">
+                </div> <!-- input-group.// -->
+                <label for="zipcode">Zip-Code*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="zipcode" placeholder="Ex. 22079-4327"
+                    formControlName="zipCode">
+                </div> <!-- input-group.// -->
+                <input type="checkbox" formControlName="confirm"> &nbsp;I authorize Braintree to debit my bank account*
+                <p style="color: red;">{{requiredFieldForPayment}}</p>
+              </div> <!-- form-group.// -->
+              <button class="subscribe btn btn-primary btn-block" type="submit"> Pay </button><br>
+            </form>
+            
+            <!-- Form for confirmation -->
+            <form role="form" [formGroup]="confirmationForm" (ngSubmit)="confirmPayment()">
+              <div *ngIf="status" class="row">
+                <p>{{confirmation}}</p>
+                <input style="width: 100px;" type="text" class="form-control" placeholder="Ex. 20"
+                  formControlName="firstAmount">
+                <input style="width: 100px;" type="text" class="form-control" placeholder="Ex. 40"
+                  formControlName="secondAmount">&nbsp;
+                <button class="subscribe btn btn-primary btn-block" type="submit" style="width: 100px;"> confirm
+                </button><br>
+                <p style="color: red;">{{requiredFieldForConfirmation}}</p>
+                <!-- <p style="color: red;">{{errorMessage}}</p> -->
+              </div>
+              <p style="color: red;">{{errorMessage}}</p>
+            </form>
+          </div> <!-- card-body.// -->
+        </article> <!-- card.// -->
+      </aside> <!-- col.// -->
+    </div> <!-- row.// -->
+  </div>
+</div>
+
+<!--container end.//-->

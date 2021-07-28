@@ -1,0 +1,35 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<nav class="navbar navbar-light" style="background-color:#00008b">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1" style="color: white;" >ACH-Braintree Auto Finance</span>
+    <a href="" style="color: white;">Payment</a>
+  </div>
+</nav>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<div class="payment">
+  <div class="container">
+    <br>
+    <div class="row">
+      <aside class="col-sm-6">
+        <p>Please keep a record of your confirmation</p>
+        <article class="card">
+          <div class="card-body p-5">
+            <p>Customer Name: {{confirmationData.data.customer.firstName}} {{confirmationData.data.customer.lastName}}</p>
+            <p>Customer Id: {{confirmationData.data.customer.id}}</p>
+            <p>Payment Amount: ${{confirmationData.data.amountRequested}}</p>
+            <p>Account: xxxxxx{{confirmationData.data.usBankAccount.last4}}</p>
+            <p>Payment Method: {{confirmationData.data.usBankAccount.accountType}}</p>
+            <p>Payment Date: {{confirmationData.data.usBankAccount.achMandate.acceptedAt|date}}</p>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </div>
+</div>
+<!--container end.//-->
+
+
